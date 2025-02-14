@@ -60,6 +60,7 @@ install(
   PROGRAMS
   scripts/pose_detector.py
   scripts/pf_pose_saver.py
+  scripts/duplicate_imu.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
