@@ -1,7 +1,7 @@
 # eYRC-2024 Integrated Logistic System  
 **Mobile Robot Navigation & UR5 Robotic Arm Pick-and-Place**
 
-This repository demonstrates an integrated solution for logistics automation where a mobile robot navigates autonomously within a defined environment and docks with a UR5 robotic arm for pick-up and drop-off operations. The system is designed using the latest **ROS2 Humble** ecosystem on **Ubuntu 22.04 LTS**, combining real-time mapping and navigation (using **Nav2** and **slam_toolbox**) with high-precision manipulation (using **MoveIt2** on the UR5 arm).
+This repository demonstrates an integrated solution for logistics automation where a mobile robot navigates autonomously within a defined environment and docks with a UR5 robotic arm for pick-up and drop-off operations. The system is designed using the latest **ROS2 Humble** ecosystem on **Ubuntu 22.04 LTS**, combining real-time mapping and navigation (using **Nav2** and **slam_toolbox**) with high-precision manipulation (using **MoveIt2** and a custom Forward Kinematics implementation on the UR5 arm).
 
 ---
 ### Pick and Place
@@ -41,7 +41,7 @@ The **eYRC-2024 Integrated Logistic System** is built to address dynamic logisti
 Key aspects of the system include:
 
 - **Autonomous Mobile Navigation:** Using the ROS2 **Nav2 stack** and **slam_toolbox** for real-time 2D mapping and localization.
-- **Robotic Arm Manipulation:** Utilizing **MoveIt2** for motion planning and execution of pick-and-place tasks by the UR5 arm.
+- **Robotic Arm Manipulation:** Utilizing **MoveIt2** for motion planning and execution of pick-and-place tasks by the UR5 arm, and a custom Forward Kinematic workflow as well.
 - **Seamless Integration:** Coordinated operations between the mobile robot and the UR5 arm via ROS2, ensuring reliable docking, object handling, and drop-off.
 - **Updated Platform:** All software components are upgraded to run on **ROS2 Humble** and **Ubuntu 22.04 LTS**.
 
@@ -75,7 +75,7 @@ The integrated logistic task involves the following sequence:
 
 2. **Docking and Interaction with UR5 Arm:**  
    - At the docking station, the mobile robot aligns with the UR5 arm station.
-   - The UR5 robotic arm, using **MoveIt2** and precise TF transformations, executes a pick-up or drop-off operation via its magnet-based or gripper mechanism.
+   - The UR5 robotic arm, using **MoveIt2** and precise TF transformations, executes a pick-up or drop-off operation via its magnet-based or gripper mechanism. An alternative purely Forward Kinematics mechanism is also implemented and serves as a implementation to understand delat join commands in ROS2.
    
 3. **Payload Transport & Cycle Repeat:**  
    - Once the UR5 arm completes the pick-and-place task, the mobile robot is directed to transport the payload to the drop zone.
@@ -94,7 +94,7 @@ The overall system architecture comprises three primary subsystems:
 2. **UR5 Robotic Arm Subsystem:**  
    - Utilizes **MoveIt2** for motion planning and grasp execution.
    - Employs ArUco markers and TF for accurate object localization and arm alignment.
-
+   - Alternative FK workflow as mentioned earlier.
 3. **Integration and Communication Layer:**  
    - ROS2 nodes interconnect both subsystems via topics and services.
    - A central coordination node schedules navigation goals and arm commands based on task status and sensor feedback.
@@ -115,6 +115,7 @@ The overall system architecture comprises three primary subsystems:
 
 3. **Pick-and-Place Operations:**
    - The UR5 robotic arm, through **MoveIt2**, moves to the predefined joint positions for picking up or releasing an object.
+   - A similar rudimentary forward kinematics  alternative has been implemented for the purposes of understanding.
    - Gripper control services (e.g., `/GripperMagnetON` and `/GripperMagnetOFF`) are used to securely hold or release the payload.
 
 4. **Transport & Drop-Off:**
