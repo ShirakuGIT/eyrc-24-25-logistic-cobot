@@ -4,6 +4,16 @@
 This repository demonstrates an integrated solution for logistics automation where a mobile robot navigates autonomously within a defined environment and docks with a UR5 robotic arm for pick-up and drop-off operations. The system is designed using the latest **ROS2 Humble** ecosystem on **Ubuntu 22.04 LTS**, combining real-time mapping and navigation (using **Nav2** and **slam_toolbox**) with high-precision manipulation (using **MoveIt2** on the UR5 arm).
 
 ---
+### Pick and Place
+![Pick and Place](./gif1.gif)
+
+### UR5 Arm Manipulation
+![Arm Manipulator](./gif2.gif)
+
+### SLAM using EKF and AMCL
+![SLAM](./gif3.gif)
+
+---
 
 ## Table of Contents
 
@@ -19,10 +29,8 @@ This repository demonstrates an integrated solution for logistics automation whe
   - [Installation Guide](#installation-guide)
 - [How to Run](#how-to-run)
 - [Task Completion & Evaluation](#task-completion--evaluation)
-- [Videos / GIFs](#videos--gifs)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
-- [Contact](#contact)
 
 ---
 
