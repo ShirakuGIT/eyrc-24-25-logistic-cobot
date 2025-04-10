@@ -3,11 +3,10 @@
 Example of using MoveIt 2 Servo to perform a circular motion.
 """
 
-from math import cos, sin
-import math, time
+import math
+import time
 from copy import deepcopy
 import rclpy
-import tf2_ros
 from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.node import Node
 from geometry_msgs.msg import TwistStamped
@@ -19,7 +18,7 @@ from rclpy.qos import (
     QoSReliabilityPolicy,
 )
 
-linear_speed = 0.1  # Set your desired linear speed
+linear_speed = 0.2  # Set your desired linear speed
 angular_speed = 0.0  # Set your desired angular speed
 
 def main():
@@ -35,11 +34,14 @@ def main():
     def servo_circular_motion():
         """Publish a TwistStamped message to move in a specific direction."""
         twist_msg = TwistStamped()
-        twist_msg.header.frame_id = ur5.base_link_name()
         
+        # Set the current timestamp and frame ID for the header
+        twist_msg.header.stamp = node.get_clock().now().to_msg()
+        twist_msg.header.frame_id = ur5.base_link_name()  # or any other frame ID you need
+
         # Set linear speeds for the circular motion example
-        twist_msg.twist.linear.x = linear_speed * cos(time.time())
-        twist_msg.twist.linear.y = linear_speed * sin(time.time())
+        twist_msg.twist.linear.x = linear_speed 
+        twist_msg.twist.linear.y = linear_speed 
         twist_msg.twist.linear.z = 0.0
         
         # Set angular speeds (adjust as needed)
